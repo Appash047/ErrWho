@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Post</title>
+    <style>
+
+        /* posts-styles.css */
+
+/* General styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+header {
+    width: 100%;
+    background-color: #9b59b6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+}
+
+nav a:hover {
+    background-color: #824c9a;
+}
+
+.bo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* Adjust to ensure space for header */
+    padding: 20px;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+input[type="text"],
+textarea,
+select,
+input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+button[type="submit"] {
+    padding: 12px;
+    background-color: #9b59b6;
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+button[type="submit"]:hover {
+    background-color: #824c9a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    button[type="submit"] {
+        padding: 10px;
+        font-size: 14px;
+    }
+}
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/ADMIN/home}">Home</a></li>
+            <li><a th:href="@{/ADMIN/add-post}">Add Post</a></li>
+            <li><a th:href="@{/posts/subscribers}">Subscribed Users</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="bo">
+    <div class="form-container add-post-page">
+        <h3 style="color:green;" th:text="${message}"></h3>
+        <h2>Add Post</h2>
+        <form th:action="@{/ADMIN/add-post}" method="post" enctype="multipart/form-data">
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Stocks">Stock Market</option>
+                <option value="Technology">Technology</option>
+                <option value="Politics">Politics</option>
+                <option value="Automobile">Automobile</option>
+                <option value="Health">Health</option>
+                <option value="Interactive Sessions">Interactive Sessions</option>
+            </select>
+
+            <label for="content">Title</label>
+            <input type="text" id="text" name="title" required>
+
+            <label for="content">Content</label>
+            <textarea id="content" name="content" placeholder="Enter content" required></textarea>
+
+            <label for="image">Image</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+            <button type="submit">Submit Post</button>
+        </form>
+    </div>
+</div>
+<script th:src="@{/js/message.js}"></script>
+</body>
+</html>

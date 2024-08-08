@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/posts-styles.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/ADMIN/home}">Home</a></li>
+            <li><a th:href="@{/ADMIN/add-post}">Add Post</a></li>
+            <li><a th:href="@{/posts/subscribers}">Subscribed Users</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+<main class="admin-home">
+    <h1>All Posts</h1>
+    <h3 class="hidden-message" th:text="${message}"></h3>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Created By</th>
+            <th>Creation Time</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post : ${posts}">
+            <td th:text="${post.id}"></td>
+            <td th:text="${post.category}"></td>
+            <td th:text="${post.title}"></td>
+            <td th:text="${post.createdBy}"></td>
+            <td th:text="${post.creationTime}"></td>
+            <td>
+                <a th:href="@{'/ADMIN/edit/' + ${post.id}}" class="btn btn-edit">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{'/ADMIN/delete/' + ${post.id}}" class="btn btn-delete">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<script th:src="@{/js/message.js}"></script>
+</body>
+</html>
